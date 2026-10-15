@@ -683,6 +683,12 @@ label.btn{cursor:pointer}
   .adm-row{grid-template-columns:52px minmax(0,1fr) auto}
   .s-title{font-size:19px}
 }
+
+/* bảng Bản đồ nền: email dài không được kéo giãn bảng (lỗi bị cắt mất phần bên phải) */
+.dropdown.glass{grid-template-columns:minmax(0,1fr);overflow-x:hidden}
+.dropdown.glass>*{min-width:0}
+.dropdown .layers-foot>.ell{flex:1 1 auto;min-width:0}
+.dropdown .layers-foot>.btn{flex:none}
 </style>
 </head>
 <body>
@@ -2239,7 +2245,7 @@ function App() {
     <h4>Vị trí của tôi</h4>
     ${me ? html`<span className="small muted">${me.manual ? 'Đã chọn trên bản đồ' : 'Theo GPS, sai số khoảng ' + fmt(me.acc, 0) + ' m'}</span>` : html`<span className="small muted">Bấm nút định vị hoặc chọn trên bản đồ để xem cửa hàng gần bạn nhất.</span>`}
     <span className="inline"><button className="btn sm" onClick=${() => { setLayersOpen(false); setMenuOpen(false); setPick({ kind: 'me' }); }}>Chọn trên bản đồ</button>${me ? html`<button className="btn sm ghost" onClick=${() => { setMe(null); if (sort === 'near') setSort('province'); }}>Bỏ vị trí</button>` : null}<button className="btn sm ghost" onClick=${() => { const m = mapRef.current; if (m) m.flyToBounds(VN_BOUNDS, { duration: 0.7 }); }}>Xem toàn quốc</button></span>
-    <div className="layers-foot">${session ? html`<span className="small muted ell">${session.user.email}${role === 'admin' ? ' · quản lý' : ''}</span><button className="btn sm ghost" onClick=${logout}>Đăng xuất</button>` : html`<button className="btn sm ghost" onClick=${() => { setLayersOpen(false); setLogin(true); }}>Đăng nhập quản lý</button>`}</div>
+    <div className="layers-foot">${session ? html`<span className="small muted ell" title=${session.user.email}>${session.user.email}${role === 'admin' ? ' · quản lý' : ''}</span><button className="btn sm ghost" onClick=${logout}>Đăng xuất</button>` : html`<button className="btn sm ghost" onClick=${() => { setLayersOpen(false); setLogin(true); }}>Đăng nhập quản lý</button>`}</div>
   </div>`;
 
   return html`<div className=${'app' + (selS && !tool ? ' has-sheet' : '') + (pick ? ' picking' : '')}>
