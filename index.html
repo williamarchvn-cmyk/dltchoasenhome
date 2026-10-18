@@ -669,7 +669,7 @@ button.drop:hover{border-color:var(--accent);color:var(--accent)}
 .adm-row{grid-template-columns:52px minmax(0,1fr) 150px auto}
 label.btn{cursor:pointer}
 @media (max-width:760px){
-  .reg-fab{height:48px;padding:0 15px 0 12px;font-size:13.5px}
+  .reg-fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + var(--safe-b));z-index:1000;height:48px;padding:0 15px 0 12px;font-size:13.5px}
   .tr-row{grid-template-columns:48px minmax(0,1fr) 40px;row-gap:4px}
   .tr-n{grid-column:2}.tr-act{grid-column:2/-1}
   .fb-main{grid-template-columns:minmax(0,1fr) auto;row-gap:6px}
